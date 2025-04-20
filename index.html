@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy 100 Days!</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: 'Helvetica Neue', sans-serif;
+      overflow: hidden;
+    }
+    .overlay {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+    .timer {
+      font-size: 2em;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    .slideshow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 1;
+    }
+    audio {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="timer" id="timer"></div>
+  </div>
+
+  <audio controls autoplay loop>
+    <source src="HOW_TO_LOVE_커버.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <img class="slideshow" id="slideshow" src="IMG_0026.jpg" alt="Us">
+
+  <script>
+    // Timer
+    const startDate = new Date("2024-01-12T00:00:00");
+    const timerEl = document.getElementById("timer");
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      timerEl.textContent = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Slideshow
+    const images = ["IMG_0026.jpg", "IMG_9895.jpg", "IMG_0894.jpg", "IMG_0695.jpg", "IMG_0785.jpg", "IMG_1048.jpg", "IMG_9086.jpg", "IMG_0649.jpg", "IMG_1085.jpg", "IMG_1057.jpg"];
+    let index = 0;
+    const slideshow = document.getElementById("slideshow");
+
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      slideshow.src = images[index];
+    }, 4000);
+  </script>
+</body>
+</html>
